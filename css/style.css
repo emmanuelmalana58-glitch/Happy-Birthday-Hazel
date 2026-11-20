@@ -121,3 +121,48 @@ footer{position:relative;z-index:1;text-align:center;padding:3rem 1rem;color:var
   .nav-btn{position:absolute;bottom:1.2rem}.prev{left:1rem}.next{right:1rem}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* music button */
+.music{position:fixed;right:1rem;bottom:1rem;z-index:30;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;font-size:1.5rem;
+  background:var(--pink);color:#fff;box-shadow:0 5px 0 #b8397c,0 8px 20px rgba(0,0,0,.35)}
+.music.on{animation:pulse 1.6s ease-in-out infinite}
+.music.off{background:#5b6597;box-shadow:0 5px 0 #3b4470;text-decoration:line-through}
+@keyframes pulse{50%{transform:scale(1.12)}}
+
+/* letter */
+.envelope-wrap{display:grid;place-items:center;gap:1.5rem}
+.envelope{position:relative;width:min(340px,86vw);height:220px;border:0;background:none;cursor:pointer;transition:transform .25s}
+.envelope:hover{transform:translateY(-4px) rotate(-1deg)}
+.envelope span{position:absolute;display:block}
+.env-back{inset:0;background:#4a7fe0;border-radius:10px;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.env-paper-peek{display:none!important}
+.env-paper-peek-unused{left:8%;right:8%;top:8%;height:60%;background:var(--cream);border-radius:6px}
+.env-front{inset:0;border-radius:10px;
+  background:linear-gradient(135deg,transparent 50%,#6f9cf0 50%) left/50% 100% no-repeat,
+             linear-gradient(225deg,transparent 50%,#5b8ae8 50%) right/50% 100% no-repeat;
+  clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);background-color:transparent}
+.env-flap{left:0;right:0;top:0;height:60%;background:#2f6fd6;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s}
+.env-seal{left:50%;top:48%;transform:translate(-50%,-50%);font-size:2.2rem;background:var(--pink);width:56px;height:56px;border-radius:50%;
+  display:grid!important;place-items:center;box-shadow:0 3px 0 #b8397c;transition:opacity .3s}
+.envelope.open .env-flap{transform:rotateX(180deg)}
+.envelope.open .env-seal{opacity:0}
+.envelope.open{animation:none}
+.paper{width:min(640px,100%);background:var(--cream);color:var(--ink);border-radius:6px;padding:2.2rem 2rem 2rem;
+  background-image:repeating-linear-gradient(transparent 0 33px,rgba(47,111,214,.13) 33px 34px);
+  box-shadow:0 18px 40px rgba(0,0,0,.4);border-left:6px solid var(--pink);animation:unfold .7s ease-out}
+@keyframes unfold{from{opacity:0;transform:translateY(-30px) scale(.94)}}
+.paper h3{font-family:'Baloo 2',cursive;font-size:2rem;color:var(--blue-d);margin-bottom:.6rem}
+.paper p{margin-bottom:1rem;font-size:1.08rem;line-height:34px;margin-block:0 34px;margin-bottom:0}
+.paper p + p{margin-top:34px}
+.paper .sign{margin-top:34px;font-family:'Baloo 2',cursive;font-size:1.4rem;color:var(--purple);white-space:pre-line;line-height:1.4}
+
+/* welcome splash */
+body.locked{overflow:hidden}
+.welcome{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:1.5rem;text-align:center;
+  background:radial-gradient(900px 600px at 70% 0%,#5a3fb5 0%,transparent 60%),linear-gradient(180deg,#14236b,#2a2380);
+  transition:opacity .7s,visibility .7s}
+.welcome.hide{opacity:0;visibility:hidden;pointer-events:none}
+.welcome-card{max-width:420px}
+.gift{font-size:5rem;animation:float 2.5s infinite ease-in-out}
+.welcome h2{margin:.5rem 0}
+.welcome p{margin:.8rem 0 1.6rem;color:var(--sky)}

@@ -14,7 +14,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="locked">
+  <div class="welcome" id="welcome" role="dialog" aria-label="Welcome">
+    <div class="welcome-card">
+      <div class="gift">🎁</div>
+      <h2>A surprise for <span id="wName">Hazel</span>!</h2>
+      <p>Turn your sound on 🔊 and tap the button to open it.</p>
+      <button class="btn" id="openBtn">🌺 Open your gift</button>
+    </div>
+  </div>
   <canvas id="confetti" aria-hidden="true"></canvas>
   <div class="stars" id="stars" aria-hidden="true"></div>
 
@@ -22,6 +30,7 @@
     <a href="#top" class="logo">🌺 Hazel</a>
     <div class="links">
       <a href="#memories">Memories</a>
+      <a href="#letter">Letter</a>
       <a href="#ohana">Ohana</a>
       <a href="#wishes">Wishes</a>
     </div>
@@ -54,6 +63,25 @@
     <h2>Our Favourite Memories</h2>
     <p class="sub">A little trip through the good times. Tap a photo to see it bigger.</p>
     <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section id="letter" class="section">
+    <h2>A Letter For You</h2>
+    <p class="sub">Tap the envelope to open it 💌</p>
+    <div class="envelope-wrap">
+      <button class="envelope" id="envelope" aria-expanded="false" aria-controls="paper">
+        <span class="env-back"></span>
+        
+        <span class="env-front"></span>
+        <span class="env-flap"></span>
+        <span class="env-seal">🌺</span>
+      </button>
+      <article class="paper" id="paper" hidden>
+        <h3 id="letterTitle"></h3>
+        <div id="letterBody"></div>
+        <p class="sign" id="letterSign"></p>
+      </article>
+    </div>
   </section>
 
   <section id="ohana" class="section ohana">
@@ -89,6 +117,9 @@
     </figure>
     <button class="nav-btn next" id="lbNext" aria-label="Next">›</button>
   </div>
+
+  <audio id="bgm" src="audio/music.mp3" loop preload="auto"></audio>
+  <button class="music" id="music" aria-label="Toggle music" aria-pressed="false">🎵</button>
 
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>

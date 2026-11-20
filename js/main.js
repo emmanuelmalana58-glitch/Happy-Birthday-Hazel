@@ -111,4 +111,49 @@
   }
   $('party').onclick = () => confetti(220);
   setTimeout(() => confetti(120), 600);
+
+  // letter
+  const L = C.letter;
+  $('letterTitle').textContent = L.title;
+  $('letterSign').textContent = L.sign;
+  L.paragraphs.forEach((t) => { const p = document.createElement('p'); p.textContent = t; $('letterBody').appendChild(p); });
+  const env = $('envelope'), paper = $('paper');
+  env.onclick = () => {
+    const opening = !env.classList.contains('open');
+    env.classList.toggle('open', opening);
+    env.setAttribute('aria-expanded', opening);
+    paper.hidden = !opening;
+    if (opening) { confetti(80); setTimeout(() => paper.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150); }
+  };
+
+  // background music (browsers block autoplay, so it starts on the first tap/key/scroll)
+  const bgm = $('bgm'), mbtn = $('music');
+  bgm.volume = 0.5;
+  let wantMusic = true;
+  const paint = () => {
+    const on = !bgm.paused;
+    mbtn.classList.toggle('on', on);
+    mbtn.classList.toggle('off', !on);
+    mbtn.setAttribute('aria-pressed', on);
+  };
+  const start = () => { if (wantMusic && bgm.paused) bgm.play().then(paint).catch(() => {}); };
+  ['pointerdown', 'keydown', 'touchstart'].forEach((ev) => addEventListener(ev, start, { once: false, passive: true }));
+  mbtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (bgm.paused) { wantMusic = true; bgm.play().then(paint).catch(() => {}); }
+    else { wantMusic = false; bgm.pause(); paint(); }
+  });
+  bgm.addEventListener('play', paint); bgm.addEventListener('pause', paint);
+  bgm.play().then(paint).catch(paint);
+
+  // welcome screen: the tap is the user gesture that lets the music autoplay
+  $('wName').textContent = C.name;
+  $('openBtn').onclick = () => {
+    wantMusic = true;
+    bgm.currentTime = 0;
+    bgm.play().then(paint).catch(paint);
+    $('welcome').classList.add('hide');
+    document.body.classList.remove('locked');
+    confetti(160);
+  };
 })();
